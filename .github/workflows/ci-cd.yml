@@ -53,5 +53,10 @@ jobs:
                 docker rm trade_order_api
             fi
 
+            PORT_PID=$(sudo lsof -t -i:8000)
+            if [ ! -z "$PORT_PID" ]; then
+                sudo kill -9 $PORT_PID
+            fi
+
             docker run -d --name trade_order_api -p 8000:8000 trade_order_api
           EOF
