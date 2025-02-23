@@ -50,8 +50,16 @@ jobs:
             docker run -d --name trade_order_api -p 8000:8000 trade_order_api
           EOF
 
-      - name: Prune stopped containers
+      - name: Stop and Remove Running Containers on Port 8000
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+            CONTAINER_ID=$(docker ps -q --filter "publish=8000")
+            if [ ! -z "$CONTAINER_ID" ]; then
+                echo "Stopping container using port 8000: $CONTAINER_ID"
+                docker stop $CONTAINER_ID
+                docker rm $CONTAINER_ID
+            else
+                echo "No container is using port 8000."
+            fi
             docker container prune -f
           EOF
