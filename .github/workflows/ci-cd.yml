@@ -43,7 +43,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /path/to/your/app
+            cd /home/ubuntu/blockhouse_worktrial
             git pull origin main
             docker build -t trade_order_api .
             docker stop trade_order_api || true
