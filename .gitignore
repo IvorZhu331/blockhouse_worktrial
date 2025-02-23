@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.pytest_cache
+
+# Virtual Environment
+.venv/
+
+# IDEs and Editors
+.idea/
+.vscode/
+
+# Environment Variables
+.env
+
+# Docker
+docker-compose.override.yml
+
+# System Files
+.DS_Store
