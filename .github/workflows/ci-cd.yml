@@ -47,16 +47,11 @@ jobs:
             cd /home/ubuntu/blockhouse_worktrial
             git pull origin main
             docker build -t trade_order_api .
-
-            if [ $(docker ps -q -f name=trade_order_api) ]; then
-                docker stop trade_order_api
-                docker rm trade_order_api
-            fi
-
-            PORT_PID=$(sudo lsof -t -i:8000)
-            if [ ! -z "$PORT_PID" ]; then
-                sudo kill -9 $PORT_PID
-            fi
-
             docker run -d --name trade_order_api -p 8000:8000 trade_order_api
+          EOF
+
+      - name: Prune stopped containers
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+            docker container prune -f
           EOF
