@@ -36,16 +36,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up SSH
-        uses: appleboy/ssh-action@v0.1.10
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+  
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ubuntu/blockhouse_worktrial
             git pull origin main
             docker build -t trade_order_api .
             docker stop trade_order_api || true
             docker rm trade_order_api || true
             docker run -d -p 8000:8000 trade_order_api
+          EOF
