@@ -47,7 +47,11 @@ jobs:
             cd /home/ubuntu/blockhouse_worktrial
             git pull origin main
             docker build -t trade_order_api .
-            docker stop trade_order_api || true
-            docker rm trade_order_api || true
-            docker run -d -p 8000:8000 trade_order_api
+
+            if [ $(docker ps -q -f name=trade_order_api) ]; then
+                docker stop trade_order_api
+                docker rm trade_order_api
+            fi
+
+            docker run -d --name trade_order_api -p 8000:8000 trade_order_api
           EOF
