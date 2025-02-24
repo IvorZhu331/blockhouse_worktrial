@@ -46,7 +46,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ubuntu/blockhouse_worktrial
             git pull origin main
-            docker build -t trade_order_api .
             docker run -d --name trade_order_api -p 8000:8000 trade_order_api
           EOF
 
