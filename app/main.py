@@ -7,7 +7,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Include the orders router
 app.include_router(orders.router)
 
 # Root endpoint
