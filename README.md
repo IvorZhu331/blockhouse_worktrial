@@ -18,7 +18,7 @@ A **FastAPI** backend for managing trade orders, containerized using **Docker**,
 ## 📁 Project Structure
 
 ```
-project/ │ 
+blockhouse_worktrial/ │ 
     ├── app/ │ 
       ├── main.py           # FastAPI entry point │ 
       ├── database.py       # SQLite database connection │ 
