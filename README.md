@@ -24,7 +24,7 @@ project/ │
       ├── database.py       # SQLite database connection │ 
       ├── models.py         # Pydantic models │ 
       └── routers/ │ 
-          └── orders.py     # API endpoints + WebSocket logic │ 
+          └── orders.py     # API endpoints
     ├── test/ │ 
         └── test_orders.py  # Unit tests for API │ 
     ├── Dockerfile          # Docker container setup 
@@ -39,7 +39,7 @@ project/ │
 ## 🧑‍💻 API Documentation
 
 **Swagger UI:**  
-Visit → `http://0.0.0.0:8000/docs`  
+Visit → `http://54.163.82.225:8000/docs`  
 
 **Available Endpoints:**
 
@@ -71,7 +71,7 @@ docker run -d -p 8000:8000 trade_order_api
 ```
 
 ### **4. Access the API**
-Visit → `http://localhost:8000/docs`
+Visit → `http://54.163.82.225:8000/docs`
 
 ---
 
