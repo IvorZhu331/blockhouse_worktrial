@@ -40,14 +40,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-  
-      - name: Deploy to EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-            cd /home/ubuntu/blockhouse_worktrial
-            git pull origin main
-            docker run -d --name trade_order_api -p 8000:8000 trade_order_api
-          EOF
 
       - name: Stop and Remove Running Containers on Port 8000
         run: |
@@ -61,4 +53,12 @@ jobs:
                 echo "No container is using port 8000."
             fi
             docker container prune -f
+          EOF
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ubuntu/blockhouse_worktrial
+            git pull origin main
+            docker run -d --name trade_order_api -p 8000:8000 trade_order_api
           EOF
