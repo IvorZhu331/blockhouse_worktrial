@@ -71,7 +71,7 @@ docker run -d -p 8000:8000 trade_order_api
 ```
 
 ### **4. Access the API**
-Visit → `http://54.163.82.225:8000/docs`
+Visit → `http://18.207.247.37:8000/docs`
 
 ---
 
